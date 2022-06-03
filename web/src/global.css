@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: theme("colors.backgroundColor");
+  color: theme("colors.textColor");
+  font-family: theme("fontFamily.sans");
+}
