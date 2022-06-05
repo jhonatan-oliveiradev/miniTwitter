@@ -2,9 +2,9 @@ Mini clone da rede social Twitter feito para o Desafio Full Stack Challenge da c
 
 # Tecnologias utilizadas:
 
-## ReactJS: Biblioteca JavaScript para SPA;
+## ReactJS: Biblioteca JavaScript para SPAs (Front-End);
 
-## NodeJS: Framework para Back-End com JavaScript;
+## NodeJS: ambiente de execução server-side (Back-End) com JavaScript;
 
 ## Vite App: ferramenta de construção de interfaces web;
 
