@@ -10,18 +10,20 @@ const Input = (props) => (
 );
 
 const validationSchema = yup.object({
+  name: yup.string().required("Digite seu nome"),
+  username: yup.string().required("Digite um nome de usuário"),
   email: yup.string().email("E-mail inválido").required("Digite seu e-mail"),
   password: yup.string().required("Digite sua senha"),
 });
 
-export function Login({ signInUser }) {
+export function Signup({ signInUser }) {
   const formik = useFormik({
     onSubmit: async (values) => {
-      const res = await axios.get("http://localhost:9901/login", {
-        auth: {
-          username: values.email,
-          password: values.password,
-        },
+      const res = await axios.post("http://localhost:9901/signup", {
+        name: values.name,
+        username: values.username,
+        email: values.email,
+        password: values.password,
       });
 
       signInUser(res.data);
@@ -36,17 +38,48 @@ export function Login({ signInUser }) {
 
   return (
     <div className="h-full flex flex-col justify-center p-12 space-y-6">
-      <h1 className="text-3xl">Acesse sua conta</h1>
+      <h1 className="text-3xl">Crie sua conta</h1>
 
       <form className="space-y-6" onSubmit={formik.handleSubmit}>
         <div className="space-y-2">
           <Input
             type="text"
+            name="name"
+            placeholder="Nome"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            disabled={formik.isSubmitting}
+          />
+          {formik.touched.name && formik.errors.name && (
+            <div className="text-red-500 text-sm">{formik.errors.name}</div>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Input
+            type="text"
+            name="username"
+            placeholder="Nome de usuário"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            disabled={formik.isSubmitting}
+          />
+          {formik.touched.username && formik.errors.username && (
+            <div className="text-red-500 text-sm">{formik.errors.username}</div>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Input
+            type="text"
             name="email"
-            placeholder="Nome de usuário ou e-mail"
+            placeholder="E-mail"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            disabled={formik.isSubmitting}
           />
           {formik.touched.email && formik.errors.email && (
             <div className="text-red-500 text-sm">{formik.errors.email}</div>
@@ -72,16 +105,12 @@ export function Login({ signInUser }) {
           className="w-full bg-birdBlue py-4 rounded-full disabled:opacity-50 text-lg"
           disabled={formik.isSubmitting || !formik.isValid}
         >
-          {formik.isSubmitting ? "Entrando..." : "Entrar"}
+          {formik.isSubmitting ? "Cadastrando..." : "Cadastrar"}
         </button>
       </form>
 
       <span className="text-sm text-silver text-center">
-        Não tem uma conta?{" "}
-        <a className="text-birdBlue" href="/signup">
-          Inscreva-se
-        </a>
-        .
+        Possui uma conta? <a className="text-birdBlue" href="/login">Faça login</a>.
       </span>
     </div>
   );
