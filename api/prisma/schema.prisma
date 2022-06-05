@@ -13,11 +13,13 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
+  id       String @id @default(cuid())
   name     String
-  email    String
-  username String
-  Tweet    Tweet[]
+  email    String @unique
+  username String @unique
+  password String
+
+  tweets Tweet[]
 }
 
 model Tweet {
