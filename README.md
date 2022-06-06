@@ -23,3 +23,5 @@ Mini clone da rede social Twitter feito para o Desafio Full Stack Challenge da c
 ## Bcrypt: Gerador de Hash & Verifier;
 
 ## PlanetScale: plataforma para gerenciamento MySQL.
+
+## Git/GitHub: versionamento de código.
