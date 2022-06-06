@@ -19,7 +19,7 @@ const validationSchema = yup.object({
 export function Signup({ signInUser }) {
   const formik = useFormik({
     onSubmit: async (values) => {
-      const res = await axios.post("http://localhost:9901/signup", {
+      const res = await axios.post(`${import.meta.env.VITE_API_HOST}/signup`, {
         name: values.name,
         username: values.username,
         email: values.email,
@@ -110,7 +110,11 @@ export function Signup({ signInUser }) {
       </form>
 
       <span className="text-sm text-silver text-center">
-        Possui uma conta? <a className="text-birdBlue" href="/login">Faça login</a>.
+        Possui uma conta?{" "}
+        <a className="text-birdBlue" href="/login">
+          Faça login
+        </a>
+        .
       </span>
     </div>
   );
